@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Application {
+start(Stage primaryStage)
+main(String[] args)
+stop()
+openFile(File inputFile)
+handle(ActionEvent event)
+saveFile(File exportFile)
+}
+
+Application <|-- Task
+class TaskList {
+String: task
+int: deadline
+boolean: complete
+addTask()
+editTask()
+deleteTask()
+initializeList()
+}
+Application <|-- Filter
+class Filter{
+displayFilter()
+}
+
+Filter *-- displayFilter
+displayFilter : boolean allItems
+displayFilter : boolean incomplete
+displayFilter : boolean complete
+
+@enduml
