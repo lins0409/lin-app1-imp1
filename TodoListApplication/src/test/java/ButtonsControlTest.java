@@ -11,7 +11,7 @@ class ButtonsControlTest {
         ButtonsControl bc = new ButtonsControl();
         String name = "cry";
         String descript = "have a breakdown";
-        LocalDate date;
+        LocalDate date = LocalDate.parse("2020-01-08");
         TaskListItems tli = new TaskListItems(name, descript, date);
     }
 

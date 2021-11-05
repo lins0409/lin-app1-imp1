@@ -1,5 +1,7 @@
 # lin-app1-imp1
 This is a simple to-do list application that allows users to add and delete items from a list.
+![Screenshot of application](https://puu.sh/In8Fj/a6785d97e9.png)
+
 * To load a file in the program: press the "Load" button to open up a new stage and find the file you wish to load.
 * To save a file: press the "Save" button to open up a new stage and export the file as a txt to wherever your heart desires.
 * To add a new task: after entering the information in the provided text boxes, press the "Add Task" button.

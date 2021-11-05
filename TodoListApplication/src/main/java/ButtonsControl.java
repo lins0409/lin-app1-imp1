@@ -145,14 +145,14 @@ public class ButtonsControl implements Initializable {
 
     @FXML
     void listFilter(ActionEvent event) {
-       String s = taskFilter.getSelectionModel().getSelectedItem().toString();
+       //String s = taskFilter.getSelectionModel().getSelectedItem().toString();
        ObservableList<TaskListItems> data = FXCollections.observableArrayList();
        for (TaskListItems task : data){
                if(task.getStatus().isSelected()){
                    data.add(task);
                }
+               
        }
-
     }
 
     @FXML

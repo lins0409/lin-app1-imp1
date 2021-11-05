@@ -3,16 +3,52 @@
 
 
 class TodoListApplication {
-start(Stage primaryStage)
+start(Stage primaryStage) throws Exception
 main(String[] args)
 }
 
 class ButtonsControl {
-initialize()
+TextField taskDescription
+DatePicker taskDueDate;
+ComboBox taskFilter;
+TableView<TaskListItems> taskList
+TextField taskName;
+TableColumn<TaskListItems, String> descriptionColumn
+TableColumn<TaskListItems, Date> dueDateColumn
+TableColumn<TaskListItems, String> statusColumn;
+TableColumn<TaskListItems, String> taskColumn
+initialize(URL location, ResourceBundle resources))
+ObservableList<TaskListItems> getTaskListItems()
+deleteTask()
+editDueDate(CellEditEvent editCell)
+editTaskDescript(CellEditEvent editCell)
+editTaskName(CellEditEvent editCell)
+listFilter(ActionEvent event)
+getFile(MouseEvent event)
+saveFile(MouseEvent event) throws IOException
+exportFile(File file)
+clearText()
 }
 
-class TaskListItems{
+ButtonsControl <|-- TaskListItems
 
+class TaskListItems{
+int counter = 1
+String taskName
+String taskDescription
+int taskID
+LocalDate dueDate;
+CheckBox status;
+String getTaskName()
+setTaskName(String taskName)
+String getTaskDescription()
+setTaskDescription(String taskDescription)
+LocalDate getDueDate()
+setDueDate(LocalDate dueDate)
+CheckBox getStatus()
+setStatus(CheckBox status)
+nextID()
+getCounter()
 }
 
 @enduml
