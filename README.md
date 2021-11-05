@@ -3,7 +3,7 @@ This is a simple to-do list application that allows users to add and delete item
 * To load a file in the program: press the "Load" button to open up a new stage and find the file you wish to load.
 * To save a file: press the "Save" button to open up a new stage and export the file as a txt to wherever your heart desires.
 * To add a new task: after entering the information in the provided text boxes, press the "Add Task" button.
-   * The maximum character limit for the task description is 256, the file will not take any more characters once the limit is reached.
+   * The maximum character limit for the task description is 256, the program will not take any more characters once the limit is reached.
    * A due date for the task is optional.
 * To delete a task: click on the desired task in the table, and then press the "Delete Task" button.
 * To clear text in the text boxes: press the  "Clear Data" button.
