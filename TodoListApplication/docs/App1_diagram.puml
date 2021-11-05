@@ -2,33 +2,17 @@
 'https://plantuml.com/class-diagram
 
 
-class Application {
+class TodoListApplication {
 start(Stage primaryStage)
 main(String[] args)
-stop()
-openFile(File inputFile)
-handle(ActionEvent event)
-saveFile(File exportFile)
 }
 
-Application <|-- Task
-class TaskList {
-String: task
-int: deadline
-boolean: complete
-addTask()
-editTask()
-deleteTask()
-initializeList()
-}
-Application <|-- Filter
-class Filter{
-displayFilter()
+class ButtonsControl {
+initialize()
 }
 
-Filter *-- displayFilter
-displayFilter : boolean allItems
-displayFilter : boolean incomplete
-displayFilter : boolean complete
+class TaskListItems{
+
+}
 
 @enduml

@@ -8,8 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-
 public class TodoListApplication extends javafx.application.Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,10 +22,5 @@ public class TodoListApplication extends javafx.application.Application{
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    //closes the program
-    public void stop(){
-
     }
 }
