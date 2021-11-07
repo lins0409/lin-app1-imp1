@@ -1,6 +1,6 @@
 # lin-app1-imp1
 This is a simple to-do list application that allows users to add and delete items from a list.
-![Screenshot of application](https://puu.sh/In8Fj/a6785d97e9.png)
+![Screenshot of application](https://puu.sh/Inz8C/a5464b3031.png)
 
 * To load a file in the program: press the "Load" button to open up a new stage and find the file you wish to load.
 * To save a file: press the "Save" button to open up a new stage and export the file as a txt to wherever your heart desires.
@@ -11,6 +11,7 @@ This is a simple to-do list application that allows users to add and delete item
 * To clear text in the text boxes: press the  "Clear Data" button.
 * To edit a task: double click on the table cell that you wish to edit. Press enter after the edit is complete to confirm the changes.
 * To mark a task as complete: click on the checkbox under the "Done" column. This box will appear once the task is added to the table. Click it again to uncheck it and mark it as incomplete.
+* To clear the entire table: click on the "Clear All" button located on above the upper right corner of the table.
 * To filter the items: click on the combobox in the upper right corner.
    * Click "All" to display all of the todo list items.
    * Click "Complete" to display completed todo list items only.
