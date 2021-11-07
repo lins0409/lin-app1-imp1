@@ -18,15 +18,17 @@ public class TaskListItems {
     //format the way the date shows up in the date picker to YYYY-MM-DD
     private LocalDate dueDate;
     private CheckBox status;
+    boolean complete = false;
 
     //constructor
-    public TaskListItems(String taskName, String taskDescription, LocalDate dueDate){
+    public TaskListItems(String taskName, String taskDescription, LocalDate dueDate, boolean complete){
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         //every time there is a new task, a new date picker is created
         this.dueDate = dueDate;
         //every time there is a new task, a new check box is made
         this.status = new CheckBox();
+        this.complete = complete;
     }
 
     //get and set for task name
@@ -57,6 +59,14 @@ public class TaskListItems {
         return status;
     }
     public void setStatus(CheckBox status) {
+        //set the bool that the task was completed
+        if(status.isSelected())complete = true;
         this.status = status;
+    }
+
+    //setters and getters for boolean value
+    public boolean isComplete(){ return complete;}
+    public void setComplete(boolean complete){
+        this.complete = complete;
     }
 }

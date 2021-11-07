@@ -14,7 +14,7 @@
     <children>
         <AnchorPane layoutY="65.0" prefHeight="404.0" prefWidth="1076.0" style="-fx-background-color: #85DCBA;">
             <children>
-            <TableView fx:id="taskList" prefHeight="306.0" prefWidth="751.0">
+            <TableView fx:id="taskList" prefHeight="306.0" prefWidth="751.0" stylesheets="@style.css">
               <columns>
                 <TableColumn fx:id="taskColumn" onEditCommit="#editTaskName" prefWidth="121.0" resizable="false" text="Task" />
                 <TableColumn fx:id="descriptionColumn" onEditCommit="#editTaskDescript" prefWidth="504.0" resizable="false" text="Description" />
@@ -23,8 +23,8 @@
               </columns>
             </TableView>
                 <Button fx:id="addButton" layoutX="974.0" layoutY="270.0" mnemonicParsing="false" onAction="#addTask" prefHeight="25.0" prefWidth="85.0" text="Add Task" />
-                <Button fx:id="deleteButton" layoutX="976.0" layoutY="306.0" mnemonicParsing="false" onAction="#deleteTask" prefHeight="25.0" prefWidth="85.0" text="Delete Task" />
-                <Button layoutX="524.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#getFile" prefHeight="44.0" prefWidth="205.0" text="Load">
+                <Button fx:id="deleteButton" layoutX="974.0" layoutY="313.0" mnemonicParsing="false" onAction="#deleteTask" prefHeight="25.0" prefWidth="85.0" text="Delete Task" />
+                <Button layoutX="524.0" layoutY="334.0" mnemonicParsing="false" onAction="#getFile" prefHeight="44.0" prefWidth="205.0" text="Load">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -36,13 +36,12 @@
                 </Button>
                 <TextField fx:id="taskName" layoutX="789.0" layoutY="72.0" prefHeight="25.0" prefWidth="272.0" promptText="Task" />
                 <TextField fx:id="taskDescription" alignment="TOP_LEFT" layoutX="789.0" layoutY="108.0" prefHeight="154.0" prefWidth="272.0" promptText="Description" />
-                <DatePicker fx:id="taskDueDate" layoutX="789.0" layoutY="270.0" onAction="#getDate" promptText="Select Due Date" />
+                <DatePicker fx:id="taskDueDate" editable="false" layoutX="789.0" layoutY="270.0" onAction="#getDate" promptText="Select Due Date" />
                 <Label layoutX="789.0" layoutY="2.0" prefHeight="66.0" prefWidth="282.0" text="Create New Task" textAlignment="CENTER" textFill="WHITE" underline="true">
                     <font>
                         <Font name="Britannic Bold" size="37.0" />
                     </font>
                 </Label>
-            <Button fx:id="clearButton" layoutX="976.0" layoutY="344.0" mnemonicParsing="false" onAction="#clearText" prefHeight="25.0" prefWidth="85.0" text="Clear Data" />
             </children>
         </AnchorPane>
         <Label alignment="CENTER" layoutX="20.0" layoutY="-2.0" text="TO DO LIST" textFill="WHITE">
@@ -51,5 +50,6 @@
             </font>
         </Label>
       <ComboBox fx:id="taskFilter" layoutX="904.0" layoutY="13.0" onAction="#listFilter" prefHeight="30.0" prefWidth="158.0" promptText="Filter" />
+      <Button fx:id="clearAll" contentDisplay="CENTER" layoutX="687.0" layoutY="34.0" mnemonicParsing="false" onAction="#clearTable" prefHeight="25.0" prefWidth="64.0" text=" Clear All" />
     </children>
 </AnchorPane>

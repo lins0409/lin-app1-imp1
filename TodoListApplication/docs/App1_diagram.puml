@@ -7,6 +7,8 @@ start(Stage primaryStage) throws Exception
 main(String[] args)
 }
 
+TodoListApplication <|-- ButtonsControl
+
 class ButtonsControl {
 TextField taskDescription
 DatePicker taskDueDate;
@@ -17,28 +19,28 @@ TableColumn<TaskListItems, String> descriptionColumn
 TableColumn<TaskListItems, Date> dueDateColumn
 TableColumn<TaskListItems, String> statusColumn;
 TableColumn<TaskListItems, String> taskColumn
-initialize(URL location, ResourceBundle resources))
+initialize()
 ObservableList<TaskListItems> getTaskListItems()
 deleteTask()
-editDueDate(CellEditEvent editCell)
-editTaskDescript(CellEditEvent editCell)
-editTaskName(CellEditEvent editCell)
+editDueDate()
+editTaskDescript()
+editTaskName()
 listFilter(ActionEvent event)
 getFile(MouseEvent event)
 saveFile(MouseEvent event) throws IOException
 exportFile(File file)
 clearText()
+clearTable()
 }
 
 ButtonsControl <|-- TaskListItems
 
 class TaskListItems{
-int counter = 1
 String taskName
 String taskDescription
-int taskID
 LocalDate dueDate;
 CheckBox status;
+boolean complete;
 String getTaskName()
 setTaskName(String taskName)
 String getTaskDescription()
@@ -47,8 +49,8 @@ LocalDate getDueDate()
 setDueDate(LocalDate dueDate)
 CheckBox getStatus()
 setStatus(CheckBox status)
-nextID()
-getCounter()
+boolean isComplete()
+setComplete(boolean complete)
 }
 
 @enduml
