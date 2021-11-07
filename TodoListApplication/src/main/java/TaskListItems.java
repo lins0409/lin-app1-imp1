@@ -3,12 +3,9 @@
  *  Copyright 2021 Sue Lin
  */
 
-import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class TaskListItems {
     //create strings for the task name and description
@@ -18,10 +15,10 @@ public class TaskListItems {
     //format the way the date shows up in the date picker to YYYY-MM-DD
     private LocalDate dueDate;
     private CheckBox status;
-    boolean complete = false;
+    boolean complete;
 
     //constructor
-    public TaskListItems(String taskName, String taskDescription, LocalDate dueDate, boolean complete){
+    public TaskListItems(String taskName, String taskDescription, LocalDate dueDate){
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         //every time there is a new task, a new date picker is created
@@ -31,6 +28,7 @@ public class TaskListItems {
         this.complete = complete;
     }
 
+    //not creating a test on any of the setters or getters because they do not count as actual tests
     //get and set for task name
     public String getTaskName() {return taskName;}
     public void setTaskName(String taskName) {
@@ -48,9 +46,6 @@ public class TaskListItems {
         return dueDate;
     }
     public void setDueDate(LocalDate dueDate) {
-        //format the way the date shows up in the date picker to YYYY-MM-DD
-        String format = "yyyy-MM-dd";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         this.dueDate = dueDate;
     }
 
