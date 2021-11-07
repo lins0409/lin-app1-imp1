@@ -10,6 +10,9 @@ main(String[] args)
 TodoListApplication <|-- ButtonsControl
 
 class ButtonsControl {
+FileChooser fileChooser
+ObservableList<TaskListItems> taskListItems
+List<List<String>> printingList
 TextField taskDescription
 DatePicker taskDueDate;
 ComboBox taskFilter;
@@ -20,7 +23,6 @@ TableColumn<TaskListItems, Date> dueDateColumn
 TableColumn<TaskListItems, String> statusColumn;
 TableColumn<TaskListItems, String> taskColumn
 initialize()
-ObservableList<TaskListItems> getTaskListItems()
 deleteTask()
 editDueDate()
 editTaskDescript()
@@ -38,9 +40,9 @@ ButtonsControl <|-- TaskListItems
 class TaskListItems{
 String taskName
 String taskDescription
-LocalDate dueDate;
-CheckBox status;
-boolean complete;
+LocalDate dueDate
+CheckBox status
+boolean complete
 String getTaskName()
 setTaskName(String taskName)
 String getTaskDescription()

@@ -56,6 +56,7 @@ public class TaskListItems {
     public void setStatus(CheckBox status) {
         //set the bool that the task was completed
         if(status.isSelected())complete = true;
+        setComplete(complete);
         this.status = status;
     }
 

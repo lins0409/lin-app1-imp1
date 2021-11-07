@@ -4,6 +4,7 @@
  */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -16,8 +17,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
@@ -31,6 +30,8 @@ public class ButtonsControl implements Initializable {
     ObservableList<TaskListItems> taskListItems = FXCollections.observableArrayList();
     //create a list of a list of strings for printing the table out to a txt file
     List<List<String>> printingList = new ArrayList<>();
+    //for filtering
+    FilteredList filteredList = new FilteredList(taskListItems);
 
     //create a global variable for character limit
     private static final int limit = 256;
@@ -104,7 +105,7 @@ public class ButtonsControl implements Initializable {
 
     //addTask button
     @FXML
-    void addTask() {
+    String addTask() {
         TaskListItems taskItems = new TaskListItems(taskName.getText(), taskDescription.getText(), taskDueDate.getValue());
         //set object to the tableview
         taskListItems = taskList.getItems();
@@ -114,6 +115,7 @@ public class ButtonsControl implements Initializable {
         taskList.setItems(taskListItems);
         //clear the elements in the textbox immediately after the items have been added
         clearText();
+        return "added";
     }
 
     //deleteTask button
@@ -170,14 +172,12 @@ public class ButtonsControl implements Initializable {
             int selectedIndex = taskFilter.getSelectionModel().getSelectedIndex();
             Object selectedItem = taskFilter.getSelectionModel().getSelectedItem();
 
-            if (s.equals("Complete")){
-                taskList.getItems();
-            }
-            if (s.equals("Incomplete")){
-                taskList.getItems();
+            if (s.equals("Complete")) taskList.setItems(taskList.getItems());
+            //if the selected value in the combobox is Incomplete
+            if (selectedItem.equals("Incomplete")){
+                taskList.setItems((ObservableList<TaskListItems>) items);
             }
         });
-
     }
 
     //to load a file
@@ -190,8 +190,7 @@ public class ButtonsControl implements Initializable {
         updateTable(file);
     }
     //used to upload all the elements from the file into the table, and also to check to make sure the file is read in for testing purposes
-    String updateTable(File file) throws IOException {
-        boolean sorting = false;
+    String updateTable(File file) {
         try {
             Scanner input = new Scanner(file);
             while ((input.hasNext())) {
@@ -220,12 +219,22 @@ public class ButtonsControl implements Initializable {
         TaskListItems items;
         for (int i = 0; i < taskList.getItems().size(); i++){
             items = taskList.getItems().get(i);
+            //add each element on the table to the new list for printing
             printingList.add(new ArrayList<>());
+
+            //format the task name
             String formatName = String.format("%s,", items.getTaskName());
             printingList.get(i).add(formatName);
+
+            //format the description
             String formatDescript = String.format("%s,", items.getTaskDescription());
             printingList.get(i).add(formatDescript);
+
             String formatDate = String.format("%s,",items.getDueDate());
+            //if the date is null, print out nothing but the separate
+            if(items.getDueDate() == null){
+                formatDate = " ,";
+            }
             printingList.get(i).add(formatDate);
             if (items.getStatus().isSelected()) {
                 complete = true;
