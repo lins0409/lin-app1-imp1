@@ -15,4 +15,4 @@ This is a simple to-do list application that allows users to add and delete item
 * To filter the items: click on the combobox in the upper right corner.
    * Click "All" to display all of the todo list items.
    * Click "Complete" to display completed todo list items only.
-   * Click "Incompelte" to display incomplete todo list items only.
+   * Click "Incomplete" to display incomplete todo list items only.
