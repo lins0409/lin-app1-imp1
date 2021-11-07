@@ -8,7 +8,7 @@ This is a simple to-do list application that allows users to add and delete item
    * The maximum character limit for the task description is 256, the program will not take any more characters once the limit is reached.
    * A due date for the task is optional.
 * To delete a task: click on the desired task in the table, and then press the "Delete Task" button.
-* To clear text in the text boxes: press the  "Clear Data" button.
+* To clear text in the text boxes: press the  "Clear Text" button.
 * To edit a task: double click on the table cell that you wish to edit. Press enter after the edit is complete to confirm the changes.
 * To mark a task as complete: click on the checkbox under the "Done" column. This box will appear once the task is added to the table. Click it again to uncheck it and mark it as incomplete.
 * To clear the entire table: click on the "Clear All" button located on above the upper right corner of the table.
