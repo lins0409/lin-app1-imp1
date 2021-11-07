@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -35,7 +34,6 @@
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <ScrollBar fx:id="Scrollbar" layoutX="750.0" layoutY="25.0" orientation="VERTICAL" prefHeight="281.0" prefWidth="14.0" />
                 <TextField fx:id="taskName" layoutX="789.0" layoutY="72.0" prefHeight="25.0" prefWidth="272.0" promptText="Task" />
                 <TextField fx:id="taskDescription" alignment="TOP_LEFT" layoutX="789.0" layoutY="108.0" prefHeight="154.0" prefWidth="272.0" promptText="Description" />
                 <DatePicker fx:id="taskDueDate" layoutX="789.0" layoutY="270.0" onAction="#getDate" promptText="Select Due Date" />

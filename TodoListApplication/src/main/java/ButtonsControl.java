@@ -2,10 +2,6 @@
  *  UCF COP3330 Fall 2021 Application Assignment 1 Solution
  *  Copyright 2021 Sue Lin
  */
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,9 +28,11 @@ public class ButtonsControl implements Initializable {
     //file chooser for allowing user to load file
     FileChooser fileChooser = new FileChooser();
     ObservableList<TaskListItems> taskListItems = FXCollections.observableArrayList();
-    ArrayList<TaskListItems> printingList = new ArrayList<TaskListItems>(taskListItems);
+    List<List<String>> printingList = new ArrayList<>();
+    ArrayList<String> todoFile;
+
     private static final int limit = 256;
-    private final BooleanProperty complete = new SimpleBooleanProperty();
+    private final boolean complete = false;
 
     @FXML
     private TextField taskDescription;
@@ -66,9 +64,7 @@ public class ButtonsControl implements Initializable {
     //intializer
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> list = FXCollections.observableArrayList("All", "Completed", "Incomplete");
-        taskFilter.setItems(list);
-
+        //this sets it so that the limit of characters in the description box is 256
         taskDescription.lengthProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() > oldValue.intValue()){
                 if(taskDescription.getText().length() >= limit){
@@ -82,15 +78,20 @@ public class ButtonsControl implements Initializable {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("taskDescription"));
         dueDateColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        taskFilter.setCellFactory(new PropertyValueFactory<TaskListItems, ComboBox>("filter"));
 
         //set editable to true so the table can be edited
         taskList.setEditable(true);
         taskColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
+        //make the datepicker editable
         taskDueDate.setEditable(true);
+        dueDateColumn.setEditable(true);
+
     }
 
+    //this is so that the combo list will display the items that I want it to
     public ObservableList<TaskListItems> getTaskListItems(){
         return taskListItems;
     }
@@ -117,7 +118,7 @@ public class ButtonsControl implements Initializable {
     @FXML
     void editDueDate(CellEditEvent editCell) {
         TaskListItems taskItem = taskList.getSelectionModel().getSelectedItem();
-        taskItem.setDueDate(LocalDate.parse(editCell.getNewValue().toString()));
+        taskItem.setDueDate(new DatePicker().getValue());
     }
 
     //edit task description when spot it double-clicked
@@ -131,9 +132,9 @@ public class ButtonsControl implements Initializable {
     //edit the task name when the spot is double-clicked
     @FXML
     void editTaskName(CellEditEvent editCell) {
-       TaskListItems taskItem = taskList.getSelectionModel().getSelectedItem();
-       //set old task name to new task name
-       taskItem.setTaskName(editCell.getNewValue().toString());
+        TaskListItems taskItem = taskList.getSelectionModel().getSelectedItem();
+        //set old task name to new task name
+        taskItem.setTaskName(editCell.getNewValue().toString());
     }
 
     @FXML
@@ -141,31 +142,32 @@ public class ButtonsControl implements Initializable {
         LocalDate myDate = taskDueDate.getValue();
     }
 
-    public
-
+    //combobox filter that will sort the elements based on if the items are marked as complete or not
     @FXML
     void listFilter(ActionEvent event) {
-       //String s = taskFilter.getSelectionModel().getSelectedItem().toString();
-       ObservableList<TaskListItems> data = FXCollections.observableArrayList();
-       for (TaskListItems task : data){
-               if(task.getStatus().isSelected()){
-                   data.add(task);
-               }
-               
-       }
+        String s = taskFilter.getSelectionModel().getSelectedItem().toString();
+        ObservableList<TaskListItems> data = FXCollections.observableArrayList();
+
     }
 
     @FXML
     void getFile(MouseEvent event) {
         File file = fileChooser.showOpenDialog(new Stage());
         try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()){
-                taskList.getItems();
+            //have the scanner open the input file
+            BufferedReader br = new BufferedReader(new FileReader((new File(" docs/todoList.txt"))));
+            String line;
+            String[] array;
+            //while the input file does not reach the end of the file
+            while ((line = br.readLine()) != null){
+                //split the input file at the comma
+                array = line.split(",");
+                //upload the elements from the text file to the table
+                taskList.getItems().add(new TaskListItems(array[0], array[1], LocalDate.parse(array[2])));
             }
-
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
+            br.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -178,14 +180,26 @@ public class ButtonsControl implements Initializable {
         }
     }
     //print the data to a txt file
-    public void exportFile(File file) {
+    public void exportFile(File file) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("docs/todoList.txt"));
+        TaskListItems items = new TaskListItems(taskName.getText(), taskDescription.getText(), taskDueDate.getValue());
+        for (int i = 0; i < taskList.getItems().size(); i++){
+            items = taskList.getItems().get(i);
+            printingList.add(new ArrayList<>());
+            String formatName = String.format("%s,", items.getTaskName());
+            printingList.get(i).add(formatName);
+            String formatDescript = String.format("%s,", items.getTaskDescription());
+            printingList.get(i).add(formatDescript);
+            String formatDate = String.format("%s\n",items.getDueDate().toString());
+            printingList.get(i).add(formatDate);
+        }
 
-        //try{
-
-
-        //}catch (IOException e) {
-            //e.printStackTrace();
-        //}
+        for (int i = 0; i < printingList.size(); i++){
+            for (int j = 0; j < printingList.get(i).size(); j++) {
+                writer.write(printingList.get(i).get(j));
+            }
+        }
+        writer.close();
     }
 
     @FXML
