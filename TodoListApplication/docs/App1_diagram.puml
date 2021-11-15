@@ -16,7 +16,7 @@ List<List<String>> printingList
 TextField taskDescription
 DatePicker taskDueDate;
 ComboBox taskFilter;
-TableView<TaskListItems> taskList
+TableView<TaskListItems> taskLists
 TextField taskName;
 TableColumn<TaskListItems, String> descriptionColumn
 TableColumn<TaskListItems, Date> dueDateColumn
@@ -53,6 +53,12 @@ CheckBox getStatus()
 setStatus(CheckBox status)
 boolean isComplete()
 setComplete(boolean complete)
+}
+
+Class ButtonControlTest{
+addTest()
+testExport()
+testImport()
 }
 
 @enduml
